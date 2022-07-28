@@ -51,7 +51,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-react": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-react2": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron-forge start\"",
+    "electron-react2": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron-forge start \"",
+    "electron-react-localhost4000": "concurrently \"npm run testing\" \"wait-on http://localhost:4000 && electron-forge start \"",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },

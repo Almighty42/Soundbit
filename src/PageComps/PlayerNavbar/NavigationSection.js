@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 // SVGR Icons
 import { PrevIcon, PauseIcon, NextIcon } from '../../SVGR/SVGRExportComp'
+// Context
+import playerContext from '../../Context/playerContext';
+
 // Style
 const useStyles = makeStyles({
     navbar: {
@@ -43,8 +46,6 @@ const useStyles = makeStyles({
         color: 'black',
     },
 });
-// Context
-import playerContext from '../../Context/playerContext';
 
 const NavigationSection = ({ toggleAudio }) => {
 

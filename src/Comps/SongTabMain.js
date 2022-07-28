@@ -6,6 +6,10 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 // Clsx
 import clsx from 'clsx';
+// Context
+import { ThemeContext } from '../App'
+import playerContext from '../Context/playerContext';
+
 // Styles
 const useStyles = makeStyles({
     main: {
@@ -51,9 +55,6 @@ const useStyles = makeStyles({
         fontSize: '14px',
     }
 });
-// Context
-import { ThemeContext } from '../App'
-import playerContext from '../Context/playerContext';
 
 const SongTabMain = () => {
     // *Style* //

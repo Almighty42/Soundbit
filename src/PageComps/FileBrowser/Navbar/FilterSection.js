@@ -11,6 +11,9 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 // Clsx
 import clsx from 'clsx';
 import { ViewArrayOutlined } from '@material-ui/icons';
+// Lodash Function
+import { isEqual } from 'lodash'
+
 // Style
 const useStyles = makeStyles({
     topBar: {
@@ -49,8 +52,6 @@ const { ipcRenderer } = window.require('electron')
 const reqData = () => {
     ipcRenderer.send('asynchronous-message', 'Requesting the data')
 }
-// Lodash Function
-import { isEqual } from 'lodash'
 
 const FilterSection = () => {
     // *Style* //
