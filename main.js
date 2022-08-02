@@ -6,12 +6,11 @@ const util = require('util');
 
 const path = require('path')
 
-
 function createWindow() {
   const mainWindow = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    icon: __dirname + '/LogIcon1.ico',
+    icon: __dirname + './src/SoundBitIcon.png',
     frame: false,
     transparent: true,
     webPreferences: {
@@ -23,7 +22,7 @@ function createWindow() {
   })
 
   mainWindow.loadURL(`file://${path.join(__dirname, '/build/index.html')}`)
-  mainWindow.webContents.openDevTools()
+  /* mainWindow.webContents.openDevTools() */
 
   ipcMain.on('minimize', () => {
     mainWindow.minimize()
@@ -130,6 +129,9 @@ function createWindow() {
 }) */
 
 app.whenReady().then(() => {
+
+  app.commandLine.appendSwitch('enable-transparent-visuals');
+  app.commandLine.appendSwitch('disable-gpu');
 
   createWindow()
 
