@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconSection from './IconSection';
 import HeaderSection from './HeaderSection';
 // Electron controls
-const { ipcRenderer } = window.require("electron");
+const { ipcRenderer } = window
 // Style
 const useStyles = makeStyles({
     title: {
@@ -77,7 +77,7 @@ const HeaderNavbar = () => {
 
     return (
         <>
-            <div className={classes.appBar} >
+             <div className={classes.appBar} >
                 <div className={classes.appBarDiv1} style={{ WebkitAppRegion: "drag" }} >
                     {/* Logo */}
                     <div className={classes.appBarDiv2}>

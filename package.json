@@ -46,11 +46,12 @@
   },
   "scripts": {
     "start": "electron-forge start",
+    "electron": "electron .",
     "testing": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-react": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-react": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-react2": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron-forge start \"",
     "electron-react-localhost4000": "concurrently \"npm run testing\" \"wait-on http://localhost:4000 && electron-forge start \"",
     "package": "electron-forge package",
@@ -78,13 +79,13 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.61",
-    "electron": "^13.6.1",
+    "electron": "^20.0.1",
     "gulp": "^4.0.2",
-    "gulp-inject": "^5.0.5"
+    "gulp-inject": "^5.0.5",
+    "npm-watch": "^0.11.0"
   },
   "config": {
     "forge": {
@@ -110,7 +111,9 @@
         },
         {
           "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "name": "soundbit"
+          }
         }
       ]
     }

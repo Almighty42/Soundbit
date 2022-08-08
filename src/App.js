@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 // Context
 import playerContext from './Context/playerContext'
-
 // Pages
 import Home from './Pages/Home'
 

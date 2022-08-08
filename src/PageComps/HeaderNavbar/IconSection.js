@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // SVGR Icons
 import { CloseIcon1, CloseIcon2, MaxIcon1, MaxIcon2, MinIcon1, MinIcon2, LogoIcon1, LogoIcon2 } from '../../SVGR/SVGRExportComp'
 // Electron controls
-const { ipcRenderer } = window.require("electron");
+const { ipcRenderer } = window
 // Style
 const useStyles = makeStyles({
     navDivSizing1: {

@@ -47,13 +47,14 @@ const useStyles = makeStyles({
     }
 });
 // Ipc renderer
-const { ipcRenderer } = window.require('electron')
+const { ipcRenderer } = 'electron'
 // Hooks
 const reqData = () => {
     ipcRenderer.send('asynchronous-message', 'Requesting the data')
 }
 
 const FilterSection = () => {
+    console.log( ipcRenderer )
     // *Style* //
     const classes = useStyles();
     // *Context* //
