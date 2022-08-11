@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconSection from './IconSection';
 import HeaderSection from './HeaderSection';
 // Electron controls
-const { ipcRenderer } = window
+const { ipcRenderer } = window.require("electron");
 // Style
 const useStyles = makeStyles({
     title: {

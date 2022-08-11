@@ -13,7 +13,6 @@ import clsx from 'clsx';
 import { ViewArrayOutlined } from '@material-ui/icons';
 // Lodash Function
 import { isEqual } from 'lodash'
-
 // Style
 const useStyles = makeStyles({
     topBar: {
@@ -42,19 +41,18 @@ const useStyles = makeStyles({
     tabTopBarH2: {
         fontFamily: "'Space Mono', sans-serif",
         fontSize: '14px',
-        cursor: 'default',
+        cursor: '',
         userSelect: 'none',
     }
 });
 // Ipc renderer
-const { ipcRenderer } = 'electron'
+const { ipcRenderer } = window.require("electron");
 // Hooks
 const reqData = () => {
     ipcRenderer.send('asynchronous-message', 'Requesting the data')
 }
 
 const FilterSection = () => {
-    console.log( ipcRenderer )
     // *Style* //
     const classes = useStyles();
     // *Context* //
@@ -73,9 +71,9 @@ const FilterSection = () => {
     // *useEffect* //
 
     // Listener for backend code
+    
     useEffect(() => {
         ipcRenderer.on('asynchronous-reply', (event, arg) => {
-            /* console.log(arg.path) */
             // If the IPC reply is successful
             if (!arg.other[0]) {
 
@@ -120,6 +118,7 @@ const FilterSection = () => {
 
         })
     }, [])
+
     // Listener that updates play icon
     useEffect(() => {
         if (playing) {

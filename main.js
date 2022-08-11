@@ -1,3 +1,4 @@
+
 const { app, BrowserWindow, ipcMain, dialog, protocol, session } = require('electron')
 
 var fs = require('fs');
@@ -10,12 +11,12 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    icon: './src/SoundBitIcon.png',
+    icon: './SoundBitIcon.png',
     frame: false,
     transparent: true,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: __dirname+'/preload.js',
       contextIsolation: false,
       partition: true,
       webSecurity:true

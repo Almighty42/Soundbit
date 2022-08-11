@@ -52,13 +52,25 @@ export default function SoundSlider({ audio }) {
     setStateVolum(q);
     audio.current.volume = q * 0.01;
   }
+  // Function that handles onWheel event
+  const handleOnWheel = (deltaY) => {
+    if (deltaY > 0) {
+      setStateVolum(statevolum-5)
+      audio.current.volume = statevolum * 0.01;
+    } else if (deltaY < 0) {
+      setStateVolum(statevolum+5)
+      audio.current.volume = statevolum * 0.01;
+    } else {
+      console.log(" deltaY error ")
+    }
+  }
 
   return (
     <>
       <div style={{ paddingRight:'10px', marginTop:'5px' }}>
         <AudioIcon />
       </div>
-      <SoundVolumeSlider value={statevolum} onChange={handleVolume} defaultValue={20} valueLabelDisplay="auto" aria-label="pretto slider" style={{ color: `${theme ? 'hsl(263, 100%, 50%)' : 'hsl(180, 60%, 50%)'}`, }} />
+      <SoundVolumeSlider value={statevolum} onChange={handleVolume} onWheel={(e) => { handleOnWheel(e.deltaY) }} defaultValue={20} valueLabelDisplay="auto" aria-label="pretto slider" style={{ color: `${theme ? 'hsl(263, 100%, 50%)' : 'hsl(180, 50%, 50%)'}`, }} />
     </>
   );
 }

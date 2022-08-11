@@ -2,8 +2,6 @@
 import React, { useContext, useState } from 'react';
 // Material UI
 import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // Context
 import { ThemeContext } from '../App'
@@ -30,7 +28,8 @@ const PrettoSlider = withStyles({
       boxShadow: 'inherit',
     },
   },
-  active: {},
+  active: {
+  },
   valueLabel: {
     left: 'calc(-50% + 4px)',
   },
@@ -59,7 +58,7 @@ export default function CustomizedSlider({ value, audio, dur, currentTime, setCu
 
   return (
     <div className={classes.root}>
-      <PrettoSlider onChange={handleProgress} value={dur ? (currentTime * 100) / dur : 0} valueLabelFormat={fmtMSS(currentTime)} valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} style={{ color: `${theme ? 'hsl(263, 100%, 50%)' : '#33CCCC'}` }} />
+      <PrettoSlider onChange={handleProgress} value={dur ? (currentTime * 100) / dur : 0} valueLabelFormat={fmtMSS(currentTime)} valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} style={{ color: `${theme ? 'hsl(263, 100%, 50%)' : '#46b9b9'}` }} />
     </div>
   );
 }
