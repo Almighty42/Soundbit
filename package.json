@@ -100,13 +100,17 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "asar": true
+        "asar": true,
+        "icon": "./src/SoundBitIcon"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "soundbit"
+            "name": "soundbit",
+            "options": {
+              "icon": "./src/SoundBitIcon.png"
+            }
           }
         },
         {

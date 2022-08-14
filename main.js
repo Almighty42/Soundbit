@@ -11,7 +11,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    icon: __dirname+'/src/SoundBitIcon.png',
+    /* icon: __dirname+'/src/SoundBitIcon.png', */
     frame: false,
     transparent: true,
     webPreferences: {
