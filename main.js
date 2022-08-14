@@ -11,7 +11,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    icon: './SoundBitIcon.png',
+    icon: __dirname+'/src/SoundBitIcon.png',
     frame: false,
     transparent: true,
     webPreferences: {
@@ -39,16 +39,16 @@ function createWindow() {
   ipcMain.on('close', () => {
     mainWindow.close()
   })
-  ipcMain.on('asynchronous-message', (event, arg) => {
+  ipcMain.on('request-data-folder', (event, arg) => {
     dialog
       .showOpenDialog({
         properties: [
-          'openDirectory',
-          'openFile'
+          'openDirectory'
         ]
       })
       .then(result => {
         if (!result.canceled) {
+          console.log(result)
           fs.readdir(
             result.filePaths[0],
             { withFileTypes: true },
@@ -99,6 +99,24 @@ function createWindow() {
               
             },
           )
+        } else {
+          event.reply('asynchronous-reply', [result.canceled, result.filePaths])
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+  })
+  ipcMain.on('request-data-file', (event,arg) => {
+    dialog
+      .showOpenDialog({
+        properties: [
+          'openFile'
+        ]
+      })
+      .then(result => {
+        if (!result.canceled) {
+          console.log(result.filePaths[0])
+          event.reply()
         } else {
           event.reply('asynchronous-reply', [result.canceled, result.filePaths])
         }

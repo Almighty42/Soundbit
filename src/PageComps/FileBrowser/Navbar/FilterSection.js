@@ -8,6 +8,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 // Clsx
 import clsx from 'clsx';
 import { ViewArrayOutlined } from '@material-ui/icons';
@@ -41,15 +55,18 @@ const useStyles = makeStyles({
     tabTopBarH2: {
         fontFamily: "'Space Mono', sans-serif",
         fontSize: '14px',
-        cursor: '',
+        cursor: 'pointer',
         userSelect: 'none',
     }
 });
 // Ipc renderer
 const { ipcRenderer } = window.require("electron");
 // Hooks
-const reqData = () => {
-    ipcRenderer.send('asynchronous-message', 'Requesting the data')
+const reqDataFolder = () => {
+    ipcRenderer.send('request-data-folder', 'Requesting the data')
+}
+const reqDataFile = () => {
+    ipcRenderer.send('request-data-file', 'Requesting the data')
 }
 
 const FilterSection = () => {
@@ -59,8 +76,8 @@ const FilterSection = () => {
     const { theme } = useContext(ThemeContext)
     const { songsSet, togglePlaying, playing, songSet1 } = useContext(playerContext)
     const { setSongsArr,
-            songsArr,
-            playIconMorphInput
+        songsArr,
+        playIconMorphInput
     } = useContext(ThemeContext)
     // *useState* //
     const [stateTitle, setStateTitle] = useState(false)
@@ -71,7 +88,7 @@ const FilterSection = () => {
     // *useEffect* //
 
     // Listener for backend code
-    
+
     useEffect(() => {
         ipcRenderer.on('asynchronous-reply', (event, arg) => {
             // If the IPC reply is successful
@@ -102,7 +119,7 @@ const FilterSection = () => {
                     finalSongsArr[number][0] = element;
                     number++
                 });
-                
+
                 arg.path.forEach(element => {
                     finalSongsArr[number2][1] = element;
                     number2++
@@ -193,10 +210,28 @@ const FilterSection = () => {
         }
     }
 
+    // TEST SECTION
+    const [open, setOpen] = React.useState(false);
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+        setAge(Number(event.target.value) || '');
+    };
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason !== 'backdropClick') {
+            setOpen(false);
+        }
+    };
+
     return (
         <>
             {/* Title */}
-            <div onClick={() => { setStateUpdate('title') ; sortItems(stateTitle, 0); }} className={clsx(classes.titleTopBar, classes.tabTopBar)} >
+            <div onClick={() => { setStateUpdate('title'); sortItems(stateTitle, 0); }} className={clsx(classes.titleTopBar, classes.tabTopBar)} >
                 <h2 className={classes.tabTopBarH2} style={{ color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}` }} >Title</h2>
                 {stateTitle ? <ExpandLessIcon className={classes.tabTopBarH2} style={{ color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}` }} /> : <ExpandMoreIcon className={classes.tabTopBarH2} style={{ color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}` }} />}
             </div>
@@ -217,8 +252,14 @@ const FilterSection = () => {
             </div>
             {/* Add songs and Remove songs */}
             <div className={clsx(classes.lengthTopBar, classes.tabTopBar)} >
-                <AddCircleOutlineIcon onClick={() => { reqData(); }} style={{ cursor: 'pointer', color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}` }} />
-                <img onClick={() => { updateSongs([]) }} src={theme ? './CloseIcon1.png' : './CloseIcon2.png'} style={{ cursor: 'pointer', color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}`, paddingLeft:'16px' }} />
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogActions>
+                            <Button onClick={() => { handleClose();reqDataFile() }}>File</Button>
+                            <Button onClick={() => { handleClose();reqDataFolder() }}>Folder</Button>
+                        </DialogActions>
+                    </Dialog>
+                <AddCircleOutlineIcon onClick={() => { /* reqData(); */ handleClickOpen() }} style={{ cursor: 'pointer', color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}` }} />
+                <img onClick={() => { updateSongs([]) }} src={theme ? './CloseIcon1.png' : './CloseIcon2.png'} style={{ cursor: 'pointer', color: `${theme ? 'hsl(261, 20%, 10%)' : 'hsl(261, 50%, 90%)'}`, paddingLeft: '16px' }} />
             </div>
 
 
