@@ -54,7 +54,7 @@ function createWindow() {
             { withFileTypes: true },
             (err, files) => {
               if (err) {
-                event.reply('asynchronous-reply', [
+                event.reply('asynchronous-reply1', [
                   result.canceled,
                   result.filePaths,
                 ])
@@ -89,7 +89,7 @@ function createWindow() {
                   }                
 
                   return Promise.resolve('Success').then(() => {
-                    event.sender.send('asynchronous-reply', { path: songsUrlData2, other: [ false , '' , songsNameData, songsMetadata, newSongs ] } /* [false, songsUrlData2, songsNameData, songsMetadata, newSongs] */)
+                    event.sender.send('asynchronous-reply1', { path: songsUrlData2, other: [ false , '' , songsNameData, songsMetadata, newSongs ] } /* [false, songsUrlData2, songsNameData, songsMetadata, newSongs] */)
                   }).catch(function(err) {
                     console.log('error: ', err);
                 })
@@ -100,7 +100,7 @@ function createWindow() {
             },
           )
         } else {
-          event.reply('asynchronous-reply', [result.canceled, result.filePaths])
+          event.reply('asynchronous-reply1', [result.canceled, result.filePaths])
         }
       }).catch(err => {
         console.log(err)
@@ -115,13 +115,14 @@ function createWindow() {
       })
       .then(result => {
         if (!result.canceled) {
-          console.log(result.filePaths[0])
-          event.reply()
+          /* console.log(result.filePaths[0]) */
+          event.reply('asynchronous-reply2', result.filePaths)
         } else {
-          event.reply('asynchronous-reply', [result.canceled, result.filePaths])
+          console.log(".then else")
+          event.reply('asynchronous-reply2', [result.canceled, result.filePaths])
         }
       }).catch(err => {
-        console.log(err)
+        console.log("Warning ERROR : "+ err)
       })
   })
 

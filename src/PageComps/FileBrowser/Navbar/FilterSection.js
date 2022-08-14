@@ -74,7 +74,7 @@ const FilterSection = () => {
     const classes = useStyles();
     // *Context* //
     const { theme } = useContext(ThemeContext)
-    const { songsSet, togglePlaying, playing, songSet1 } = useContext(playerContext)
+    const { songsSet, togglePlaying, playing, songSet1, songs } = useContext(playerContext)
     const { setSongsArr,
         songsArr,
         playIconMorphInput
@@ -90,8 +90,10 @@ const FilterSection = () => {
     // Listener for backend code
 
     useEffect(() => {
-        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        ipcRenderer.on('asynchronous-reply1', (event, arg) => {
+            console.log("Async Reply 1")
             // If the IPC reply is successful
+            console.log(arg)
             if (!arg.other[0]) {
 
                 // Sorting for frontend
@@ -133,6 +135,13 @@ const FilterSection = () => {
 
             }
 
+        })
+        ipcRenderer.on('asynchronous-reply2', (event, arg) => {
+            console.log("Async Reply 2")
+            console.log(arg[0])
+            if (!arg[0]) {
+                console.log("File opened")
+            }
         })
     }, [])
 
