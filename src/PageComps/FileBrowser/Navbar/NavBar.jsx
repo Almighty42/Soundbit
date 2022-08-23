@@ -8,7 +8,7 @@ import SongTabMain from '../../../Comps/SongTabMain';
 const useStyles = makeStyles({
     main: {
         width: '100%',
-        margin: '0px 20px'
+        margin: '0px 20px',
     },
     topBar: {
         height: 'auto',
@@ -42,15 +42,26 @@ const useStyles = makeStyles({
         cursor: 'default',
         userSelect: 'none'
     },
-    bodyBar: {
+    bodyBar1: {
         width: '100%',
-        height: '100%',
+        height: '70%',
+        overflow: 'auto',
+        overflowX: 'hidden',
+        '&::-webkit-scrollbar': {
+            width: '5px',
+        },
+        '&::-webkit-scrollbar-track': {
+            visibility:'hidden'
+        },
+        '&::-webkit-scrollbar-thumb': {
+            background: '#888',
+            borderRadius:'5px'
+        }
     }
 });
 
 const NavBar = () => {
-
-    // *Style* //
+    // Style //
     const classes = useStyles();
 
     return (
@@ -60,7 +71,7 @@ const NavBar = () => {
                 <FilterSection />
             </div>
             {/* Body of songs */}
-            <div className={classes.bodyBar} >
+            <div className={classes.bodyBar1} >
                 <SongTabMain />
             </div>
         </div>

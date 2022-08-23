@@ -1,6 +1,5 @@
 // React
 import { useState, useContext, useRef, useEffect } from 'react'
-import { ThemeContext } from '../../App'
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 // Comps
@@ -8,6 +7,7 @@ import Slider from '../../Comps/Slider'
 import SoundSlider from '../../Comps/SoundSlider'
 // Context
 import playerContext from '../../Context/playerContext';
+import { ThemeContext } from '../../App'
 // Sections
 import NavigationSection from './NavigationSection';
 // Style
@@ -47,43 +47,63 @@ const useStyles = makeStyles({
 });
 
 const PlayerNavbar = () => {
-
-    // *useState* //
+    // useState //
     const [dur, setDur] = useState(0)
-    const [currentTime, setCurrentTime] = useState(0)
     const [autoplayState, setAutoplayState] = useState(true)
-    // *Style* //
+    // Style //
     const classes = useStyles();
-    // *Context* //
+    // Context //
     const {
         currentSong,
         songs,
         playing,
         handleEnd,
-
+        SetCurrent,
     } = useContext(playerContext)
-    // *useRef* //
+    const { audioFlip,
+        currentTime,
+        setCurrentTime,
+        val,
+    } = useContext(ThemeContext)
+    // useRef //
     const audio = useRef('audio_tag');
-    // *useEffect* //
-    // Autoplay fix code
+    // useEffect //
+    useEffect(() => {
+        toggleAudio()
+        console.log("Audio")
+    }, [audioFlip])
+    
     useEffect(() => {
         setAutoplayState(!autoplayState)
     }, [playing])
 
-    // *Functions* //
+    useEffect(() => {
+      audio.current.currentTime = 0
+      setCurrentTime(0)
+    }, [val])
+
+    // Functions //
     // Function that turns seconds into a 00:00 format
     const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + ~~(s) }
     // Function that plays audio in Reducer
     const toggleAudio = () => { audio.current.paused ? audio.current.play() : audio.current.pause(); }
-    
-    /* console.log(`customProtocol://${songs[currentSong][1]}`) */
-    /* console.log(songs[currentSong][1]) */
+
+    const urlFunc = () => {
+        if (songs[currentSong] === undefined) {
+            let newCurrentSong = currentSong-1
+            SetCurrent(newCurrentSong)
+            return songs[newCurrentSong].url
+        } else {
+            return songs[currentSong].url
+        }
+    }
+
     return (
         <>
             <div className={classes.navbar}>
                 {/* Song Navigation */}
                 <div className={classes.navbarDivL} >
-                    <NavigationSection toggleAudio={toggleAudio} />
+                    <NavigationSection toggleAudio={toggleAudio} audio={audio} />
                 </div>
                 {/* Song slider and audio element */}
                 <div className={classes.navbarDivC} >
@@ -96,7 +116,7 @@ const PlayerNavbar = () => {
 
                         ref={audio}
                         type="audio/mpeg"
-                        src={songs.length === 0 ? '' : '' + songs[currentSong][1]}
+                        src={songs.length === 0 ? '' : urlFunc()}
                         preload='true'
                     />
                     <Slider audio={audio} dur={dur} currentTime={currentTime} setCurrentTime={setCurrentTime} fmtMSS={fmtMSS} />

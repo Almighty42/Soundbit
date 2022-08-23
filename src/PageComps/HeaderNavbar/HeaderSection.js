@@ -1,11 +1,9 @@
-
 // React
 import { useContext } from 'react';
 import { ThemeContext } from '../../App'
 
 const HeaderSection = () => {
-
-    // *Context* //
+    // Context //
     const { theme } = useContext(ThemeContext)
 
     return (

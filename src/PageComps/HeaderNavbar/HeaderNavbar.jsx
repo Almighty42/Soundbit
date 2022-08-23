@@ -1,4 +1,3 @@
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 // Sections
@@ -71,13 +70,12 @@ const useStyles = makeStyles({
 });
 
 const HeaderNavbar = () => {
-
-    // *Style* //
+    // Style //
     const classes = useStyles();
 
     return (
         <>
-            <div className={classes.appBar} >
+             <div className={classes.appBar} >
                 <div className={classes.appBarDiv1} style={{ WebkitAppRegion: "drag" }} >
                     {/* Logo */}
                     <div className={classes.appBarDiv2}>

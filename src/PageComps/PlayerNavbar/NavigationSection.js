@@ -1,4 +1,3 @@
-
 // React
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../../App'
@@ -9,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { PrevIcon, PauseIcon, NextIcon } from '../../SVGR/SVGRExportComp'
 // Context
 import playerContext from '../../Context/playerContext';
-
 // Style
 const useStyles = makeStyles({
     navbar: {
@@ -47,11 +45,10 @@ const useStyles = makeStyles({
     },
 });
 
-const NavigationSection = ({ toggleAudio }) => {
-
-    // *Style* //
+const NavigationSection = ({ toggleAudio, audio }) => {
+    // Style //
     const classes = useStyles();
-    // *Context* //
+    // Context //
     const {
         nextSong,
         prevSong,
@@ -62,14 +59,14 @@ const NavigationSection = ({ toggleAudio }) => {
 
     const { 
         playIconMorph, 
-        playIconMorphInput 
-        
+        playIconMorphInput,
+        setCurrentTime 
     } = useContext(ThemeContext)
 
     return (
         <>
             {/* Previous song */}
-            <IconButton onClick={() => { if (songs.length !== 0) { playIconMorphInput(false);prevSong(); } }}>
+            <IconButton onClick={() => { if (songs.length !== 0) { playIconMorphInput(false);prevSong();setCurrentTime(0); audio.current.currentTime = 0 } }}>
                 <PrevIcon className={classes.icon} />
             </IconButton>
             {/* Play/Pause song */}
@@ -77,7 +74,7 @@ const NavigationSection = ({ toggleAudio }) => {
                 <PauseIcon />
             </IconButton>
             {/* Next song */}
-            <IconButton onClick={() => { if (songs.length !== 0) { playIconMorphInput(false);nextSong() } }}>
+            <IconButton onClick={() => { if (songs.length !== 0) { playIconMorphInput(false);nextSong();setCurrentTime(0); audio.current.currentTime = 0 } }}>
                 <NextIcon className={classes.icon} />
             </IconButton>
         </>

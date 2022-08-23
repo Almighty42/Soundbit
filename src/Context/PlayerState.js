@@ -33,35 +33,30 @@ const PlayerState = props => {
 
   // Prev song
   const prevSong = () => {
+    console.log("PrevSong")
     if (state.currentSong === 0) {
       SetCurrent(state.songs.length - 1)
     } else {
       SetCurrent(state.currentSong - 1)
     }
   }
+  
   // Next song
   const nextSong = () => {
     if (state.currentSong === state.songs.length - 1) {
       SetCurrent(0)
     } else {
-      /* console.log(state) */
       SetCurrent(state.currentSong + 1)
-      /* console.log(state) */
+
     }
   }
-  // Set Song 1
-  const songSet1 = () => {
-    SetCurrent(0);
-  }
-
-  // Set songs array
-  const songsSet = (songArr) => {dispatch({ type: SET_SONGS_ARRAY, data: songArr })}
   
-
+  // Set songs array
+  const songsSet = (songArr) => {dispatch({ type: SET_SONGS_ARRAY, data: songArr });}
+  
   // Repeat and Random
   const toggleRepeat = (id) => dispatch({ type: TOGGLE_REPEAT, data: state.repeat ? false : true })
   const toggleRandom = (id) => dispatch({ type: TOGGLE_RANDOM, data: state.random ? false : true })
-
 
   // End of Song
   const handleEnd = () => {
@@ -78,7 +73,6 @@ const PlayerState = props => {
       }
     }
   }
-
 
   return <playerContext.Provider
     value={{
@@ -97,8 +91,7 @@ const PlayerState = props => {
       togglePlayingFalse,
       togglePlayingTrue,
       handleEnd,
-      songsSet,
-      songSet1
+      songsSet
     }}>
 
     {props.children}

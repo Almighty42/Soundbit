@@ -4,10 +4,17 @@
   "private": true,
   "description": "App Description",
   "author": "Almoghty42",
+  "license": "UNLICENSED",
   "dependencies": {
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.0",
+    "@mui/styles": "^5.9.3",
     "@reach/slider": "^0.15.3",
     "@shwilliam/react-rubber-slider": "^0.1.4",
     "@testing-library/jest-dom": "^5.14.1",
@@ -16,6 +23,8 @@
     "clsx": "^1.1.1",
     "concurrently": "^6.2.0",
     "d3": "^7.0.0",
+    "electron-hot-reload": "^0.1.4",
+    "electron-reload": "^2.0.0-alpha.1",
     "electron-squirrel-startup": "^1.0.0",
     "framer-motion": "^4.1.17",
     "jsmediatags": "^3.9.7",
@@ -46,11 +55,14 @@
   },
   "scripts": {
     "start": "electron-forge start",
+    "electron": "electron .",
+    "electron-buildrun": "react-scripts build && electron .",
     "testing": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-react": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "localserver": "concurrently \"npm run testing\" \"wait-on http://localhost:3000\"",
+    "electron-react": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-react2": "concurrently \"npm run testing\" \"wait-on http://localhost:3000 && electron-forge start \"",
     "electron-react-localhost4000": "concurrently \"npm run testing\" \"wait-on http://localhost:4000 && electron-forge start \"",
     "package": "electron-forge package",
@@ -78,24 +90,27 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.61",
-    "electron": "^13.6.1",
+    "electron": "^20.0.1",
     "gulp": "^4.0.2",
-    "gulp-inject": "^5.0.5"
+    "gulp-inject": "^5.0.5",
+    "npm-watch": "^0.11.0"
   },
   "config": {
     "forge": {
       "packagerConfig": {
-        "asar": true
+        "icon": "./src/SoundBitIcon"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "soundbit"
+            "name": "soundbit",
+            "options": {
+              "icon": "./src/SoundBitIcon.png"
+            }
           }
         },
         {
@@ -106,11 +121,11 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "options": {
+              "icon": "./src/SoundBitIcon.png"
+            }
+          }
         }
       ]
     }
