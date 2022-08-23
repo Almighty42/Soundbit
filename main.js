@@ -1,30 +1,26 @@
-
-const { app, BrowserWindow, ipcMain, dialog, protocol, session } = require('electron')
-
+// Electron
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+// Other
 var fs = require('fs');
 const mm = require('music-metadata');
-const util = require('util');
-
 const path = require('path')
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    /* icon: __dirname+'/src/SoundBitIcon.png', */
     frame: false,
     transparent: true,
     webPreferences: {
       nodeIntegration: true,
-      preload: __dirname+'/preload.js',
+      preload: __dirname + '/preload.js',
       contextIsolation: false,
       partition: true,
-      webSecurity:true
+      webSecurity: true
     }
   })
 
   mainWindow.loadURL(`file://${path.join(__dirname, '/build/index.html')}`)
-  /* mainWindow.webContents.openDevTools() */
 
   ipcMain.on('minimize', () => {
     mainWindow.minimize()
@@ -39,16 +35,16 @@ function createWindow() {
   ipcMain.on('close', () => {
     mainWindow.close()
   })
+  // ipcMain when user wants to import a folder
   ipcMain.on('request-data-folder', (event, arg) => {
     dialog
       .showOpenDialog({
         properties: [
           'openDirectory'
-        ]
+        ],
       })
       .then(result => {
         if (!result.canceled) {
-          console.log(result)
           fs.readdir(
             result.filePaths[0],
             { withFileTypes: true },
@@ -59,11 +55,17 @@ function createWindow() {
                   result.filePaths,
                 ])
               }
+              // Sort out files that are in invalid form
+              var acceptedFiles = []
+              files.map((file) => {
+                if (file.name.includes('.mp3') || file.name.includes('.wav') || file.name.includes('.ogg')) {
+                  acceptedFiles.push({ name: file.name })
+                }
+              })
               if (files[0]) {
-                var url = result.filePaths
                 let prefix = result.filePaths + '/'
-                let newSongs = files.map((s) => {
-                  return [s.name.split('.')[0], prefix + s.name]
+                let newSongs = acceptedFiles.map((song) => {
+                  return [song.name.split('.')[0], prefix + song.name]
                 })
 
                 var songsUrlData = []
@@ -82,21 +84,21 @@ function createWindow() {
                   const audioFile = audioFiles.shift();
 
                   if (audioFile) {
-                    return mm.parseFile(audioFile, { duration:true } ).then(metadata => {
+                    return mm.parseFile(audioFile, { duration: true }).then(metadata => {
                       songsMetadata.push(metadata)
-                      return parseFiles(audioFiles); 
+                      return parseFiles(audioFiles);
                     })
-                  }                
+                  }
 
                   return Promise.resolve('Success').then(() => {
-                    event.sender.send('asynchronous-reply1', { path: songsUrlData2, other: [ false , '' , songsNameData, songsMetadata, newSongs ] } /* [false, songsUrlData2, songsNameData, songsMetadata, newSongs] */)
-                  }).catch(function(err) {
-                    console.log('error: ', err);
-                })
+                    event.sender.send('asynchronous-reply1', { path: songsUrlData2, other: [false, '', songsNameData, songsMetadata, newSongs] } /* [false, songsUrlData2, songsNameData, songsMetadata, newSongs] */)
+                  }).catch(function (err) {
+                    console.log('catch error: ', err);
+                  })
                 }
                 parseFiles(songsUrlData)
               }
-              
+
             },
           )
         } else {
@@ -106,48 +108,47 @@ function createWindow() {
         console.log(err)
       })
   })
-  ipcMain.on('request-data-file', (event,arg) => {
+  // ipcMain when user wants to import a file
+  ipcMain.on('request-data-file', (event, arg) => {
     dialog
       .showOpenDialog({
         properties: [
           'openFile'
+        ],
+        filters: [
+          { name: 'Audio', extensions: ['mp3', 'wav', 'ogg'] },
+          { name: 'All Files', extensions: ['*'] }
         ]
       })
       .then(result => {
         if (!result.canceled) {
-          /* console.log(result.filePaths[0]) */
-          event.reply('asynchronous-reply2', result.filePaths)
+          let fileURL = result.filePaths[0]
+          // Check if file is in valid form, if not throw error in frontend
+          if (fileURL.includes(".mp3") || fileURL.includes(".wav") || fileURL.includes(".ogg")) {
+            let fileName = path.parse(result.filePaths[0]).name
+
+            parseOneFile = (audioFile) => {
+
+              if (audioFile) {
+                return mm.parseFile(audioFile).then(metadata => {
+                  event.sender.send('asynchronous-reply2', { path: fileURL, other: [false, '', fileName, metadata] })
+                })
+              }
+            }
+
+            parseOneFile(fileURL)
+          } else {
+            event.reply('error - invalid file type', fileURL)
+          }
         } else {
-          console.log(".then else")
           event.reply('asynchronous-reply2', [result.canceled, result.filePaths])
         }
       }).catch(err => {
-        console.log("Warning ERROR : "+ err)
+        console.log("Warning ERROR : " + err)
       })
   })
 
 }
-
-/* protocol.registerSchemesAsPrivileged([
-  { scheme: 'customProtocol', privileges: { bypassCSP: true } }
-]) */
-
-/* app.on('ready', async () => {
-
-  const partition = 'persist:example'
-  const ses = session.fromPartition(partition)
-
-  ses.protocol.registerFileProtocol('customProtocol', (request, callback) => {
-    const url = request.url.replace(`customProtocol://`, '')
-    try {
-      return callback(decodeURIComponent(url))
-    }
-    catch (error) {
-      // Handle the error as needed
-      console.error('ERROR: registerLocalResourceProtocol: Could not get file path:', error)
-    }
-  })
-}) */
 
 app.whenReady().then(() => {
 

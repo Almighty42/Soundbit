@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 // Material UI
 import Slider from '@material-ui/core/Slider';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -44,11 +44,11 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 export default function CustomizedSlider({ value, audio, dur, currentTime, setCurrentTime, fmtMSS }) {
-  // *Style* //
+  // Style //
   const classes = useStyles();
-  // *Context* //
+  // Context //
   const { theme } = useContext(ThemeContext)
-  // *Functions* //
+  // Functions //
   // Function that connects Reducer and Slider
   const handleProgress = ( event ,e) => {
     let compute = (e * dur) / 100;

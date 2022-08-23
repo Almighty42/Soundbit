@@ -1,4 +1,3 @@
-
 // React
 import { useState, useContext } from 'react';
 import { ThemeContext } from '../../App'
@@ -35,10 +34,9 @@ const useStyles = makeStyles({
 });
 
 const IconSection = () => {
-
-    // *Style* //
+    // Style //
     const classes = useStyles();
-    // *Context* //
+    // Context //
     const { theme, themeFunction } = useContext(ThemeContext)
 
     return (

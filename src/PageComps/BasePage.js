@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 const BasePage = (props) => {
 
-    // *Context* //
+    // Context //
     const { theme } = useContext(ThemeContext)
 
     return (

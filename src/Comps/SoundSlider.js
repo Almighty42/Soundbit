@@ -2,10 +2,7 @@
 import React, { useContext, useState, useRef } from 'react';
 // Material UI
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 // Context
 import { ThemeContext } from '../App'
 // Icons
@@ -42,11 +39,11 @@ const SoundVolumeSlider = withStyles({
 })(Slider);
 
 export default function SoundSlider({ audio }) {
-  // *useState* //
+  // useState //
   const [statevolum, setStateVolum] = useState(100)
-  // *Context* //
+  // Context //
   const { theme } = useContext(ThemeContext)
-  // *Functions* //
+  // Functions //
   // Function that handles volume between Reducer and Slider
   const handleVolume = (event, q) => {
     setStateVolum(q);
