@@ -109,12 +109,14 @@
           "name": "@electron-forge/maker-wix",
           "config": {
             "name": "soundbit",
-            "platforms": ["windows"],
+            "platforms": [
+              "windows"
+            ],
             "ui": {
               "chooseDirectory": true,
               "images": {
-                "banner": ".\\src\\SoundBitBanner.bmp",
-                "background":"E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBackground.bmp"
+                "banner": "E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBanner.bmp",
+                "background": "E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBackground.bmp"
               }
             }
           }
