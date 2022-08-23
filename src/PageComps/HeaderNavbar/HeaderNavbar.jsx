@@ -1,4 +1,3 @@
-
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 // Sections
@@ -71,8 +70,7 @@ const useStyles = makeStyles({
 });
 
 const HeaderNavbar = () => {
-
-    // *Style* //
+    // Style //
     const classes = useStyles();
 
     return (
