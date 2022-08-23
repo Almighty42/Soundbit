@@ -110,12 +110,20 @@
           "config": {
             "name": "soundbit",
             "platforms": ["windows"],
+            "options": {
+              "icon": "./src/SoundBitIcon.png"
+            },
             "ui": {
-              "chooseDirectory": true,
-              "images": {
-                "banner": ".\\src\\SoundBitBanner.bmp",
-                "background":"E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBackground.bmp"
-              }
+              "chooseDirectory": true
+            }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "soundbit",
+            "options": {
+              "icon": "./src/SoundBitIcon.png"
             }
           }
         },
