@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "App Description",
-  "author": "Almoghty42",
+  "author": "Almighty42",
   "license": "UNLICENSED",
   "dependencies": {
     "@electron-forge/maker-rpm": "^6.0.0-beta.65",
@@ -95,6 +95,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.61",
     "electron": "^20.0.1",
+    "electron-wix-msi": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-inject": "^5.0.5",
     "npm-watch": "^0.11.0"
@@ -111,14 +112,7 @@
             "name": "soundbit",
             "platforms": [
               "windows"
-            ],
-            "ui": {
-              "chooseDirectory": true,
-              "images": {
-                "banner": "E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBanner.bmp",
-                "background": "E:\\Other\\Projekti\\(Sajtovi)\\PROJECTS\\test\\Soundbit\\src\\SoundBitBackground.bmp"
-              }
-            }
+            ]
           }
         },
         {
