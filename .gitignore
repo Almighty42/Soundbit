@@ -9,8 +9,9 @@
 /coverage
 
 # production
-./build
-./jsonbackup.txt
+/build
+/dist
+.jsonbackup.txt
 
 # misc
 .DS_Store

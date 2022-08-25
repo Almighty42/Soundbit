@@ -49,13 +49,21 @@
   "build": {
     "appId": "myledgerapp",
     "extends": null,
-    "files": [
-      "./build/**/*",
-      "./public/electron.js"
-    ]
+    "win": {
+      "target": ["nsis"],
+      "icon":"src/SoundBitIcon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "installerIcon": "src/SoundBitIcon.ico",
+      "uninstallerIcon": "src/SoundBitIcon.ico",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "scripts": {
     "start": "electron-forge start",
+    "build-installer":"electron-builder",
     "electron": "electron .",
     "electron-buildrun": "react-scripts build && electron .",
     "testing": "react-scripts start",
@@ -106,15 +114,6 @@
         "icon": "./src/SoundBitIcon"
       },
       "makers": [
-        {
-          "name": "",
-          "config": {
-            "name": "soundbit",
-            "platforms": [
-              "windows"
-            ]
-          }
-        },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
