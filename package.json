@@ -107,7 +107,7 @@
       },
       "makers": [
         {
-          "name": "@electron-forge/maker-wix",
+          "name": "",
           "config": {
             "name": "soundbit",
             "platforms": [
