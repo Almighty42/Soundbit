@@ -106,6 +106,9 @@
   },
   "config": {
     "forge": {
+      "electronRebuildConfig": {
+        "forceABI": 89
+      },
       "packagerConfig": {
         "icon": "./src/SoundBitIcon"
       },
