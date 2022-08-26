@@ -17,7 +17,6 @@
     "@mui/material": "^5.10.0",
     "@mui/styles": "^5.9.3",
     "@reach/slider": "^0.15.3",
-    "@shwilliam/react-rubber-slider": "^0.1.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -120,7 +119,9 @@
         },
         {
           "name": "@electron-forge/maker-dmg",
-          "platforms":["darwin"],
+          "platforms": [
+            "darwin"
+          ],
           "config": {
             "format": "ULFO"
           }
