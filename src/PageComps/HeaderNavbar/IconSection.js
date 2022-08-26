@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // SVGR Icons
 import { CloseIcon1, CloseIcon2, MaxIcon1, MaxIcon2, MinIcon1, MinIcon2, LogoIcon1, LogoIcon2 } from '../../SVGR/SVGRExportComp'
 // Electron controls
-const { ipcRenderer } = window.require("electron");
+
 // Style
 const useStyles = makeStyles({
     navDivSizing1: {
@@ -32,7 +32,6 @@ const useStyles = makeStyles({
         }
     },
 });
-
 const IconSection = () => {
     // Style //
     const classes = useStyles();
@@ -49,15 +48,15 @@ const IconSection = () => {
                         <img src='./DarkModeIcon1.png' />
                     </div>
                     {/* Minimize Icon */}
-                    <div onClick={() => { ipcRenderer.send('minimize') }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.minWindow() }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
                         <MinIcon2 className={classes.navIcon1} />
                     </div>
                     {/* Maximize Icon */}        
-                    <div onClick={() => { ipcRenderer.send('maximize') }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.maxWindow() }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
                         <MaxIcon2 className={classes.navIcon1} />
                     </div>
                     {/* Close Icon */}
-                    <div onClick={() => { ipcRenderer.send('close') }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.closeWindow() }} className={classes.navDivSizing1} style={{ WebkitAppRegion: "no-drag" }}>
                         <CloseIcon2 className={classes.navIcon1} />
                     </div>
                 </>
@@ -69,15 +68,15 @@ const IconSection = () => {
                         <img src='./DarkModeIcon2.png' />
                     </div>
                     {/* Minimize Icon */}
-                    <div onClick={() => { ipcRenderer.send('minimize') }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.minWindow() }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
                         <MinIcon1 className={classes.navIcon1} />
                     </div>
                     {/* Maximize Icon */}  
-                    <div onClick={() => { ipcRenderer.send('maximize') }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.maxWindow() }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
                         <MaxIcon1 className={classes.navIcon1} />
                     </div>
                     {/* Close Icon */}
-                    <div onClick={() => { ipcRenderer.send('close') }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
+                    <div onClick={() => { window.electronAPI.closeWindow() }} className={classes.navDivSizing2} style={{ WebkitAppRegion: "no-drag" }}>
                         <CloseIcon1 className={classes.navIcon1} />
                     </div>
                 </>

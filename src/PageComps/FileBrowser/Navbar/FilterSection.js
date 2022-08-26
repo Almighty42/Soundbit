@@ -50,13 +50,13 @@ const useStyles = makeStyles({
     }
 });
 // Ipc renderer
-const { ipcRenderer } = window.require("electron");
+const ipcRenderer = window.ipcRenderer
 // Hooks
 const reqDataFolder = () => {
-    ipcRenderer.send('request-data-folder', 'Requesting the data')
+    window.electronAPI.reqFolder()
 }
 const reqDataFile = () => {
-    ipcRenderer.send('request-data-file', 'Requesting the data')
+    window.electronAPI.reqFile()
 }
 
 const FilterSection = () => {
@@ -95,7 +95,7 @@ const FilterSection = () => {
     // Listener for backend code
 
     useEffect(() => {
-        ipcRenderer.on('asynchronous-reply1', (event, arg) => {
+        window.electronAPI.asyncReply1((event, arg) => {
             console.log("Async Reply 1")
             // If the IPC reply is successful
             if (!arg.other[0]) {
@@ -138,9 +138,8 @@ const FilterSection = () => {
 
                 newSongs = []
             }
-
         })
-        ipcRenderer.on('asynchronous-reply2', (event, arg) => {
+        window.electronAPI.asyncReply2((event, arg) => {
             console.log("Async Reply 2")
             // If the IPC reply is successful
             if (!arg.other[0]) {
@@ -152,7 +151,7 @@ const FilterSection = () => {
                 i.current = i.current + 1
             }
         })
-        ipcRenderer.on('error - invalid file type', (event, arg) => {
+        window.electronAPI.invalidValue((event, arg) => {
             setOpen2(true)
             setDialog(arg+' : is not a valid file')
         })

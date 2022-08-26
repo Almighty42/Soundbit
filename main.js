@@ -1,5 +1,5 @@
 // Electron
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, session, protocol } = require('electron')
 // Other
 var fs = require('fs');
 const mm = require('music-metadata');
@@ -12,9 +12,9 @@ function createWindow() {
     frame: false,
     transparent: true,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
       preload: __dirname + '/preload.js',
-      contextIsolation: false,
+      contextIsolation: true,
       partition: true,
       webSecurity: true
     }
@@ -91,7 +91,7 @@ function createWindow() {
                   }
 
                   return Promise.resolve('Success').then(() => {
-                    event.sender.send('asynchronous-reply1', { path: songsUrlData2, other: [false, '', songsNameData, songsMetadata, newSongs] } /* [false, songsUrlData2, songsNameData, songsMetadata, newSongs] */)
+                    event.sender.send('asynchronous-reply1', { path: songsUrlData2, other: [false, '', songsNameData, songsMetadata, newSongs] })
                   }).catch(function (err) {
                     console.log('catch error: ', err);
                   })
@@ -149,8 +149,27 @@ function createWindow() {
   })
 
 }
-
 app.whenReady().then(() => {
+
+  /* session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ['default-src \'none\' \'unsafe-inline\' data: filesystem:']
+      }
+    })
+  }) */
+
+  protocol.registerFileProtocol('my-magic-protocol', (request, callback) => {
+    const url = request.url.replace('my-magic-protocol://getMediaFile/', '')
+    try {
+      return callback(url)
+    }
+    catch (error) {
+      console.error(error)
+      return callback(404)
+    }
+  })
 
   app.commandLine.appendSwitch('enable-transparent-visuals');
   app.commandLine.appendSwitch('disable-gpu');
