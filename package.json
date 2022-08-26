@@ -37,8 +37,6 @@
     "react-audio-player": "^0.17.0",
     "react-dom": "^17.0.2",
     "react-lodash": "^0.1.2",
-    "react-native-fs": "^2.18.0",
-    "react-pose": "^4.0.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "read-audio-tags": "^0.1.1",
