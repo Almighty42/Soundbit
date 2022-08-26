@@ -53,8 +53,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "src/SoundBitIcon.ico",
-      "requestedExecutionLevel": "requireAdministrator"
+      "icon": "src/SoundBitIcon.ico"
     },
     "nsis": {
       "installerIcon": "src/SoundBitIcon.ico",
@@ -113,7 +112,8 @@
     "electron-wix-msi": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-inject": "^5.0.5",
-    "npm-watch": "^0.11.0"
+    "npm-watch": "^0.11.0",
+    "electron-builder": "^23.3.3"
   },
   "config": {
     "forge": {
