@@ -50,8 +50,10 @@
     "appId": "myledgerapp",
     "extends": null,
     "win": {
-      "target": ["nsis"],
-      "icon":"src/SoundBitIcon.ico",
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/SoundBitIcon.ico",
       "requestedExecutionLevel": "requireAdministrator"
     },
     "nsis": {
@@ -59,11 +61,16 @@
       "uninstallerIcon": "src/SoundBitIcon.ico",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
-    }
+    },
+    "files": [
+      "*.js",
+      "build",
+      "node_modules"
+    ]
   },
   "scripts": {
     "start": "electron-forge start",
-    "build-installer":"electron-builder",
+    "build-installer": "electron-builder",
     "electron": "electron .",
     "electron-buildrun": "react-scripts build && electron .",
     "testing": "react-scripts start",
@@ -126,6 +133,12 @@
             "options": {
               "icon": "./src/SoundBitIcon.png"
             }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "format": "ULFO"
           }
         }
       ]

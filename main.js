@@ -20,6 +20,8 @@ function createWindow() {
     }
   })
 
+  console.log(`file://${path.join(__dirname, '/build/index.html')}`)
+
   mainWindow.loadURL(`file://${path.join(__dirname, '/build/index.html')}`)
 
   ipcMain.on('minimize', () => {
