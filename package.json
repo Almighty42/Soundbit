@@ -1,6 +1,6 @@
 {
   "name": "soundbit",
-  "version": "1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "App Description",
   "author": "Almighty42",
@@ -97,7 +97,6 @@
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
     "@electron-forge/maker-dmg": "^6.0.0-beta.65",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/plugin-webpack": "^6.0.0-beta.61",
     "electron": "^20.0.1",
     "electron-builder": "^23.3.3",
     "npm-watch": "^0.11.0"
