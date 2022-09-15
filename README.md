@@ -25,6 +25,7 @@ Once all the dependencies have finished downloading, run ```npm run electron-bui
 <br>
 <ul>
  <li>Supports: mp3, wav and ogg.</li>
+ <li>Supports: Windows and Linux</li>
  <li>Displays name of the song, artist name</li>
  <li>Quickly switch tracks from the playlist.</li>
  <li>Choose between Dark or Light themes</li>
