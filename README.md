@@ -7,7 +7,7 @@
 SoundBit is a minimalistic and stylish music player with support for mp3,wav and ogg file formats.
 
 
-[Downloads](https://github.com/Almighty42/Soundbit/releases/tag/1.0.0)
+[Downloads](https://github.com/Almighty42/Soundbit/releases/tag/1.1.0)
 </div>
 
 # How to use
