@@ -59,18 +59,19 @@ const PlayerNavbar = () => {
         playing,
         handleEnd,
         SetCurrent,
+        togglePlaying
     } = useContext(playerContext)
     const { audioFlip,
         currentTime,
         setCurrentTime,
         val,
+        playIconMorphInput
     } = useContext(ThemeContext)
     // useRef //
     const audio = useRef('audio_tag');
     // useEffect //
     useEffect(() => {
         toggleAudio()
-        console.log("Audio")
     }, [audioFlip])
     
     useEffect(() => {
@@ -98,6 +99,13 @@ const PlayerNavbar = () => {
         }
     }
 
+    const iconChange = () => {
+        playIconMorphInput(true); 
+        togglePlaying(); 
+        setCurrentTime(0); 
+        audio.current.currentTime = 0 
+    }
+
     return (
         <>
             <div className={classes.navbar}>
@@ -111,7 +119,7 @@ const PlayerNavbar = () => {
 
                         onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
                         onCanPlay={(e) => setDur(e.target.duration)}
-                        onEnded={handleEnd}
+                        onEnded={() => { handleEnd(iconChange) }}
                         autoPlay={autoplayState}
 
                         ref={audio}

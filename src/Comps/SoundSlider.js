@@ -57,8 +57,6 @@ export default function SoundSlider({ audio }) {
     } else if (deltaY < 0) {
       setStateVolum(statevolum+5)
       audio.current.volume = statevolum * 0.01;
-    } else {
-      console.log(" deltaY error ")
     }
   }
 

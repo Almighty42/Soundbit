@@ -16,11 +16,10 @@ function createWindow() {
       preload: __dirname + '/preload.js',
       contextIsolation: true,
       partition: true,
-      webSecurity: true
+      webSecurity: true,
+      devTools: false
     }
   })
-
-  console.log(`file://${path.join(__dirname, '/build/index.html')}`)
 
   mainWindow.loadURL(`file://${path.join(__dirname, '/build/index.html')}`)
 

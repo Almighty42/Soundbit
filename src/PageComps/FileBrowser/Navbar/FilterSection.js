@@ -96,7 +96,6 @@ const FilterSection = () => {
 
     useEffect(() => {
         window.electronAPI.asyncReply1((event, arg) => {
-            console.log("Async Reply 1")
             // If the IPC reply is successful
             if (!arg.other[0]) {
 
@@ -140,7 +139,6 @@ const FilterSection = () => {
             }
         })
         window.electronAPI.asyncReply2((event, arg) => {
-            console.log("Async Reply 2")
             // If the IPC reply is successful
             if (!arg.other[0]) {
                 setFlip2(true)

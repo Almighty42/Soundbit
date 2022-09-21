@@ -33,7 +33,6 @@ const PlayerState = props => {
 
   // Prev song
   const prevSong = () => {
-    console.log("PrevSong")
     if (state.currentSong === 0) {
       SetCurrent(state.songs.length - 1)
     } else {
@@ -59,7 +58,7 @@ const PlayerState = props => {
   const toggleRandom = (id) => dispatch({ type: TOGGLE_RANDOM, data: state.random ? false : true })
 
   // End of Song
-  const handleEnd = () => {
+  const handleEnd = (func) => {
     // Check for random and repeat options
     if (state.random) {
       return dispatch({ type: SET_CURRENT_SONG, data: ~~(Math.random() * state.songs.length) })
@@ -67,6 +66,7 @@ const PlayerState = props => {
       if (state.repeat) {
         nextSong()
       } else if ((state.currentSong === state.songs.length - 1)) {
+        func()
         return
       } else {
         nextSong();
